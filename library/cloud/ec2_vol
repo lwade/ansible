@@ -103,7 +103,7 @@ def main():
             region = dict(),
             zone = dict(),
             ec2_url = dict(aliases=['EC2_URL']),
-            ec2_secret_key = dict(aliases=['EC2_SECRET_KEY']),
+            ec2_secret_key = dict(aliases=['EC2_SECRET_KEY'], no_log=True),
             ec2_access_key = dict(aliases=['EC2_ACCESS_KEY']),
         )
     )

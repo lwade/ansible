@@ -112,7 +112,7 @@ def main():
             state  = dict(choices=['present', 'absent']),
             expiry = dict(default=600),
             s3_url = dict(aliases=['S3_URL']),
-            ec2_secret_key = dict(aliases=['EC2_SECRET_KEY']),
+            ec2_secret_key = dict(aliases=['EC2_SECRET_KEY'], no_log=True),
             ec2_access_key = dict(aliases=['EC2_ACCESS_KEY']),
             overwrite = dict(default="false", choices=BOOLEANS),
         ),
