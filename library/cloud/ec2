@@ -196,6 +196,13 @@ local_action:
 
 import sys
 import time
+import pkg_resources
+
+# Boto version check. 
+boto_version = pkg_resources.get_distribution("boto").version
+if not pkg_resources.parse_version(boto_version) >= pkg_resources.parse_version('2.5.2'):
+    print "This module requires boto version 2.5.2 or higher."
+    sys.exit(1)
 
 try:
     import boto.ec2

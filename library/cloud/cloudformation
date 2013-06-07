@@ -89,13 +89,12 @@ EXAMPLES = '''
 
 import boto.cloudformation.connection
 import json
-
+import pkg_resources
 
 class Region:
     def __init__(self, region):
         self.name = region
         self.endpoint = 'cloudformation.%s.amazonaws.com' % region
-
 
 def boto_exception(err):
 
@@ -171,6 +170,12 @@ def main():
     stack_outputs = {}
     stack_outputs[module.params['region']] = {}
     stack_outputs[module.params['region']][stack_name] = {}
+
+    # Boto version check, before we open a connection.
+    boto_version = pkg_resources.get_distribution("boto").version
+    if not pkg_resources.parse_version(boto_version) >= pkg_resources.parse_version('2.5.2'):
+        print "This module requires boto version 2.5.2 or higher."
+        sys.exit(1)
 
     try:
         cfn = boto.cloudformation.connection.CloudFormationConnection(
